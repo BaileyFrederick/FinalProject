@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public void map(View v){
         Intent x = new Intent(this, MapActivity.class);
         startActivity(x);
+        //test
     }
     public void heart(View v){
         Intent x = new Intent(this, HealthActivity.class);
