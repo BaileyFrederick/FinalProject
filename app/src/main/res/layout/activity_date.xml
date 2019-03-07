@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:background="@color/menu">
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background= "@drawable/menu"
+            android:layout_marginLeft="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="10dp"
+            android:text="March 6th"
+            android:textSize="25dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/menu"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:00PM"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/menu"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2:00PM"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/menu"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/menu"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="90dp"
+                    android:text= "Math 435"
+                    android:layout_marginTop="80dp"
+                    android:background="@drawable/rounded_corner"
+                    android:backgroundTint="@color/colorPrimary"
+                    />
+                <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="90dp"
+                    android:text= "Comp 433"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_corner"
+                    android:backgroundTint="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="90dp"
+                    android:text= "Practice"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/rounded_corner"
+                    android:backgroundTint="@color/colorPrimary"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorPrimary"/>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/microphone"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
