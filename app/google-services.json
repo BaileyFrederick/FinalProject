@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "975198382839",
+    "firebase_url": "https://rammy-b91a5.firebaseio.com",
+    "project_id": "rammy-b91a5",
+    "storage_bucket": "rammy-b91a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975198382839:android:58868709ffc52f7a",
+        "android_client_info": {
+          "package_name": "com.example.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975198382839-9l4mokt2ne37d9ajeum3s8mkouoapa3g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQSqfkownn9m81r1tseALS97dK9rR1WjY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
