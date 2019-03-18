@@ -69,10 +69,18 @@
             android:background="@drawable/heart"
             android:onClick="heart"/>
 
-        <ImageView android:layout_height="120dp"
+        <ImageView
+            android:id="@+id/microphone"
+            android:layout_height="120dp"
             android:layout_width="120dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/microphone"/>
     </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/speech"
+        android:text="hi"/>
 
 </LinearLayout>
