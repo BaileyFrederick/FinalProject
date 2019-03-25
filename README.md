@@ -7,4 +7,9 @@ NEW BRANCH,
 Commit,
 push,
 create pull request in github,
-megre
+merge
+
+Responsibilities:
+
+A: GPS, Health 
+B: Calendar, Speech
