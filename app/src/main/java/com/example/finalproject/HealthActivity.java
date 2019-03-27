@@ -10,12 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class HealthActivity extends AppCompatActivity implements SensorEventListener {
 
     SensorManager sm;
     Sensor s;
     Sensor l;
     TextView step;
+    TextView miles;
+    TextView calories;
+    TextView height;
+    TextView weight;
     int steps = 0;
 
     @Override
@@ -29,6 +35,12 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         sm.registerListener(this,s, 500000);
         l = sm.getDefaultSensor(Sensor.TYPE_HEART_RATE);
         sm.registerListener(this,l,500000);
+
+        miles = (TextView) findViewById(R.id.miles);
+        calories = (TextView) findViewById(R.id.calories);
+        height = (TextView) findViewById(R.id.height);
+        weight = (TextView) findViewById(R.id.weight);
+
     }
 
     @Override
@@ -56,5 +68,13 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
             Log.v("MYTAG", ""+e.getLocalizedMessage());
         }
 
+        double totalMiles = steps*0.00047348484848485;
+        double totalMilesRounded = Math.round(totalMiles*100.0)/100.0;
+        String totalMilesString = Double.toString(totalMilesRounded);
+        miles.setText(totalMilesString);
+
+        double totalCals = steps*0.05;
+        String totalCalsString = Double.toString(totalCals);
+        calories.setText(totalCalsString);
     }
 }
