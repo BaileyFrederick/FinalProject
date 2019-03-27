@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -22,6 +24,7 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     TextView calories;
     TextView height;
     TextView weight;
+    CustomBarGraphView barGraph;
     int steps = 0;
 
     @Override
@@ -40,6 +43,7 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         calories = (TextView) findViewById(R.id.calories);
         height = (TextView) findViewById(R.id.height);
         weight = (TextView) findViewById(R.id.weight);
+        barGraph = (CustomBarGraphView) findViewById(R.id.bargraph);
 
     }
 
@@ -74,7 +78,39 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         miles.setText(totalMilesString);
 
         double totalCals = steps*0.05;
-        String totalCalsString = Double.toString(totalCals);
+        double totalCalsRounded = Math.round(totalCals*100.0)/100.0;
+        String totalCalsString = Double.toString(totalCalsRounded);
         calories.setText(totalCalsString);
+
+        barGraph.addPoint(totalMilesRounded);
+
+        double maxPoint = barGraph.maxPoint();
+        double scale = maxPoint/8;
+
+        TextView ypoint1 = (TextView) findViewById(R.id.ypoint1);
+        TextView ypoint2 = (TextView) findViewById(R.id.ypoint2);
+        TextView ypoint3 = (TextView) findViewById(R.id.ypoint3);
+        TextView ypoint4 = (TextView) findViewById(R.id.ypoint4);
+        TextView ypoint5 = (TextView) findViewById(R.id.ypoint5);
+        TextView ypoint6 = (TextView) findViewById(R.id.ypoint6);
+        TextView ypoint7 = (TextView) findViewById(R.id.ypoint7);
+        TextView ypoint8 = (TextView) findViewById(R.id.ypoint8);
+        TextView ypoint9 = (TextView) findViewById(R.id.ypoint9);
+
+        ypoint1.setText(String.valueOf(Math.round(maxPoint*100.0)/100.0));
+        ypoint2.setText(String.valueOf(Math.round((maxPoint-scale)*100.0)/100.0));
+        ypoint3.setText(String.valueOf(Math.round((maxPoint-scale*2)*100.0)/100.0));
+        ypoint4.setText(String.valueOf(Math.round((maxPoint-scale*3)*100.0)/100.0));
+        ypoint5.setText(String.valueOf(Math.round((maxPoint-scale*4)*100.0)/100.0));
+        ypoint6.setText(String.valueOf(Math.round((maxPoint-scale*5)*100.0)/100.0));
+        ypoint7.setText(String.valueOf(Math.round((maxPoint-scale*6)*100.0)/100.0));
+        ypoint8.setText(String.valueOf(Math.round((maxPoint-scale*7)*100.0)/100.0));
+        ypoint9.setText(String.valueOf(Math.round((maxPoint-scale*8)*100.0)/100.0));
+
+    }
+
+    public void goBack(View v){
+        Intent x = new Intent(this, MainActivity.class);
+        startActivity(x);
     }
 }
