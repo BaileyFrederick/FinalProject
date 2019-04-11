@@ -2,6 +2,8 @@
   <component name="FileTypeManager" version="17">
     <extensionMap>
       <mapping ext="klib" type="ARCHIVE" />
+      <mapping pattern="training.csv" type="PLAIN_TEXT" />
+      <mapping pattern="training" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
 </application>
