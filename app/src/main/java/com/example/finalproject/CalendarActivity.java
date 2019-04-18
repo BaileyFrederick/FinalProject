@@ -20,9 +20,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -55,6 +64,19 @@ public class CalendarActivity extends AppCompatActivity {
         display.getSize(size);
         width = size. x;
         height = size. y;
+
+        FirebaseHandler f = new FirebaseHandler();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date d = new Date();
+        String date = dateFormat.format(d);
+        SimpleDateFormat dtf = new SimpleDateFormat("HH:mm:ss");
+        String t = dtf.format(d);
+        List<String> list = new ArrayList<String>();
+        list.add("T");
+        list.add("S");
+
+        Event e = new Event(date, "Class", "Sitterson", t, list);
+        f.addEvent(e);
 
 
         c.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
