@@ -2,10 +2,8 @@ package com.example.finalproject;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
-import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,31 +12,58 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
-import java.sql.Time;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Locale;
-
-import javax.xml.datatype.Duration;
 
 public class MainActivity extends AppCompatActivity{
 
     private TextView txtSpeechInput;
     private ImageView btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
+    private DrawerLayout drawerLayout;
 
-    
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
+        //mDatabase.child("message").setValue("Te");
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Message");
+        Log.v("MYTAG",""+myRef.getParent());
+        myRef.child("Test").setValue("Hello, Bailey");
+
+
+        // Read from the database
+        myRef.child("Test").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d("MYTAG", "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("MYTAG", "Failed to read value.", error.toException());
+            }
+        });
+
         txtSpeechInput = (TextView) findViewById(R.id.speech);
         btnSpeak = (ImageView) findViewById(R.id.microphone);
-
-        // hide the action bar
-        //getActionBar().hide();
 
         btnSpeak.setOnClickListener(new View.OnClickListener() {
 
@@ -140,7 +165,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void foo(View v){
-        Intent x = new Intent(this, MainActivity2.class);
+        Intent x = new Intent(this, CalendarActivity.class);
         startActivity(x);
     }
 }
