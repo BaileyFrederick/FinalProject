@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void map(View v){
-        onStop();
+        //onStop();
         Intent x = new Intent(this, MapActivity.class);
         startActivity(x);
         //te
