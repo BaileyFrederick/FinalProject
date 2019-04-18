@@ -14,6 +14,7 @@
         <Button
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:onClick="goBack"
             android:background= "@drawable/menu"
             android:layout_marginLeft="5dp"/>
         <TextView
@@ -28,26 +29,37 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="10dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Miles:"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textSize="25dp"/>
-
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="Height:"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Enter Here"
+            android:id="@+id/height"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3.81"
-            android:textSize="25dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="    Weight:"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Enter Here"
+            android:id="@+id/weight"
             />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -72,7 +84,25 @@
             android:id="@+id/step"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miles:"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="25dp"
+            android:id="@+id/miles"
+            />
+
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -92,15 +122,208 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2051"
+            android:text="0"
+            android:id="@+id/calories"
             android:textSize="25dp"
             />
 
     </LinearLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="15dp" />
+    
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:background="@drawable/chart"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ylabel"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:rotation="-95"
+            android:text="Miles"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:id="@+id/ypoint1"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="0.0"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint2"/>
+            <TextView
+                android:layout_width="30dp"
+                android:text="0.0"
+                android:layout_height="30dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint3"/>
+            <TextView
+                android:layout_width="30dp"
+                android:text="0.0"
+                android:layout_height="30dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint4"/>
+            <TextView
+                android:layout_width="30dp"
+                android:text="0.0"
+                android:layout_height="30dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint5"/>
+            <TextView
+                android:layout_width="30dp"
+                android:text="0.0"
+                android:layout_height="30dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint6"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textSize="12sp"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint7"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textSize="12sp"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint8"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:textSize="12sp"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:id="@+id/ypoint9"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="28dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:text="0.0"
+                android:id="@+id/ypoint10"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:text="0.0"
+                android:id="@+id/ypoint0"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content" />
+
+    <com.example.finalproject.CustomBarGraphView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:id="@+id/bargraph"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:id="@+id/point1"
+            android:text="12am"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="3am"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:id="@+id/point2"/>
+        <TextView
+            android:layout_width="30dp"
+            android:text="6am"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:id="@+id/point3"/>
+        <TextView
+            android:layout_width="30dp"
+            android:text="9am"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:id="@+id/point4"/>
+        <TextView
+            android:layout_width="35dp"
+            android:text="12pm"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:id="@+id/point5"/>
+        <TextView
+            android:layout_width="30dp"
+            android:text="3pm"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:id="@+id/point6"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:text="6pm"
+            android:textColor="@color/black"
+            android:id="@+id/point7"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:text="9pm"
+            android:textColor="@color/black"
+            android:id="@+id/point8"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:text="12am"
+            android:textColor="@color/black"
+            android:id="@+id/point9"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/xlabel"
+        android:textStyle="bold"
+        android:text="                                           Time of Day"
+        android:textColor="@color/black"
+        />
 
 </LinearLayout>
