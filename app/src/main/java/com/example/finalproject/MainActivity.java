@@ -46,28 +46,9 @@ public class MainActivity extends AppCompatActivity{
         //mDatabase.child("message").setValue("Te");
 
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Message");
-        Log.v("MYTAG",""+myRef.getParent());
-        myRef.child("Test").setValue("Hello, Bailey");
+        new FirebaseHandler();
 
 
-        // Read from the database
-        myRef.child("Test").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d("MYTAG", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("MYTAG", "Failed to read value.", error.toException());
-            }
-        });
 
         txtSpeechInput = (TextView) findViewById(R.id.speech);
         btnSpeak = (ImageView) findViewById(R.id.microphone);
