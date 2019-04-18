@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:id="@+id/calendarFL">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/calLL">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -22,13 +26,19 @@
             android:layout_marginLeft="80dp"
             android:text="Calendar"
             android:textSize="25dp"/>
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="70dp"
+            android:background="@drawable/add"
+            android:onClick="Add"/>
 
     </LinearLayout>
     
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:onClick="dayPick">
+        android:id="@+id/cv">
 
     </CalendarView>
 
@@ -43,5 +53,6 @@
         android:background="@drawable/microphone"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"/>
+    </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

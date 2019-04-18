@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -23,109 +26,434 @@
             android:layout_marginTop="10dp"
             android:text="March 6th"
             android:textSize="25dp"/>
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/add"
+            android:onClick="Add"/>
     </LinearLayout>
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:orientation="vertical">
-
+        android:layout_height="400dp"
+        android:id="@+id/dateSV">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
-
-
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="20dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12:00PM"
+                    android:text="12:00AM"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/menu"/>
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Noon"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1:00PM"
-                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
                     android:background="@color/menu"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2:00PM"
-                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
                     android:background="@color/menu"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3:00PM"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
                     android:background="@color/menu"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:00PM"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
                     android:background="@color/menu"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5:00PM"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11:00PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/menu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:00AM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="40dp"
                     android:background="@color/menu"/>
             </LinearLayout>
-
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fl">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="220dp"
-                    android:layout_height="90dp"
-                    android:text= "Math 435"
-                    android:layout_marginTop="80dp"
-                    android:background="@drawable/rounded_corner"
-                    android:backgroundTint="@color/colorPrimary"
-                    />
-                <TextView
-                    android:layout_width="220dp"
-                    android:layout_height="90dp"
-                    android:text= "Comp 433"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_corner"
-                    android:backgroundTint="@color/colorPrimary"
-                    />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/ll">
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="61dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
 
-                <TextView
-                    android:layout_width="220dp"
-                    android:layout_height="90dp"
-                    android:text= "Practice"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/rounded_corner"
-                    android:backgroundTint="@color/colorPrimary"
-                    />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+
+
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/gray" />
 
             </LinearLayout>
-
+            </FrameLayout>
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 
     <ImageView
@@ -140,4 +468,6 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
