@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity{
     private ImageView btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
+    private boolean heartOpened = false;
+
+    private Intent healthIntent;
+
+    private HealthActivity h;
+
     
 
     @Override
@@ -130,13 +136,21 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void map(View v){
+        onStop();
         Intent x = new Intent(this, MapActivity.class);
         startActivity(x);
         //te
     }
     public void heart(View v){
-        Intent x = new Intent(this, HealthActivity.class);
-        startActivity(x);
+        //onPause();
+        if(!heartOpened) {
+            healthIntent = new Intent(this, HealthActivity.class);
+            startActivity(healthIntent);
+        }
+        else{
+            healthIntent = new Intent(this, HealthActivity.class);
+        }
+
     }
 
     public void foo(View v){

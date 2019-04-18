@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class HealthActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -27,10 +31,23 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     CustomBarGraphView barGraph;
     int steps = 0;
 
+    DatabaseHandler dbh;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
+        /*if(savedInstanceState!=null){
+            Log.v("MY_TAG", "SAVED INSTANCE STATE NOT NULL");
+            step.setText((CharSequence)(savedInstanceState.get("step")));
+            miles.setText((CharSequence)(savedInstanceState.get("miles")));
+            calories.setText((CharSequence)(savedInstanceState.get("calories")));
+            height.setText((CharSequence)(savedInstanceState.get("height")));
+            weight.setText((CharSequence)(savedInstanceState.get("weight")));
+
+        }
+        */
+
 
         step = (TextView) findViewById(R.id.step);
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -45,6 +62,31 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         weight = (TextView) findViewById(R.id.weight);
         barGraph = (CustomBarGraphView) findViewById(R.id.bargraph);
 
+        dbh = new DatabaseHandler(getApplicationContext());
+        //dbh.addHealthInfo(this);
+        //int b = dbh.getAllHealthInputs().size();
+        //Log.v("MY_TAG", "HEALTH INPUT SIZE= "+b);
+        //SQLiteDatabase db = this.openOrCreateDatabase("GlobalDB", Context.MODE_PRIVATE, null);
+        //dbh.onCreate(db);
+
+
+        List<String[]> toSet = dbh.getAllHealthInputs();
+        if(toSet.size()>0) {
+            int max = 0;
+            int maxIndex = 0;
+            for (int i = 0; i < toSet.size(); i++) {
+                if (Integer.valueOf(toSet.get(i)[2]) > max) {
+                    max = Integer.valueOf(toSet.get(i)[2]);
+                    maxIndex = i;
+                }
+            }
+
+            step.setText(toSet.get(maxIndex)[2]);
+            miles.setText(toSet.get(maxIndex)[3]);
+            calories.setText(toSet.get(maxIndex)[4]);
+            height.setText(toSet.get(maxIndex)[5]);
+            weight.setText(toSet.get(maxIndex)[6]);
+        }
     }
 
     @Override
@@ -52,7 +94,7 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
 
         if(event.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
             float x = event.values[0];
-            Log.v("MY_TAG", "step result = " + x);
+            //Log.v("MY_TAG", "step result = " + x);
             updateSteps();
         }else{
             Log.v("MY_TAG", "HERE " + event.values[0]);
@@ -110,7 +152,33 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     }
 
     public void goBack(View v){
+        dbh.addHealthInfo(this);
         Intent x = new Intent(this, MainActivity.class);
         startActivity(x);
     }
+
+    /*@Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        textView.setText(savedInstanceState.getString(TEXT_VIEW_KEY));
+    }
+    */
+
+    // invoked when the activity may be temporarily destroyed, save the instance state here
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+
+        Log.v("MY_TAG", "IN ON SAVE INSTANCE STATE");
+        outState.putString("step", step.getText().toString());
+        outState.putString("miles", miles.getText().toString());
+        outState.putString("calories", calories.getText().toString());
+        outState.putString("height", height.getText().toString());
+        outState.putString("weight", weight.getText().toString());
+
+        //Log.v("MY_TAG", outState.getString("step"));
+        // call superclass to save any view hierarchy
+    }
+
+
 }
