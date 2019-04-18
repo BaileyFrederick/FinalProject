@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:background="@color/menu">
 
@@ -21,7 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginLeft="80dp"
-            android:text="Health"
+            android:layout_marginTop="10dp"
+            android:text="HEALTH"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="25dp"/>
 
     </LinearLayout>
@@ -34,27 +37,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@color/black"
-            android:text="Height:"/>
+            android:text="   Height:"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Enter Here"
+            android:textSize="18dp"
+            android:hint="Enter Here"
             android:id="@+id/height"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@color/black"
             android:text="    Weight:"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Enter Here"
+            android:textSize="18dp"
+            android:hint="Enter Here"
             android:id="@+id/weight"
             />
 
@@ -65,29 +68,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary"
         android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Steps:"
+            android:text="  Steps:"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="25dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:textColor="@color/black"
+            android:background="@color/menu"
             android:textSize="25dp"
+            android:textStyle="bold"
             android:id="@+id/step"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Miles:"
+            android:text="       Miles:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:textSize="25dp"/>
@@ -96,6 +105,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@color/menu"
             android:textSize="25dp"
             android:id="@+id/miles"
             />
@@ -105,25 +117,31 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary"
         android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calories:"
+            android:text="          Calories:"
             android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginRight="10dp"
+            android:layout_gravity="center"
             android:textSize="25dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:layout_gravity="center"
             android:id="@+id/calories"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@color/menu"
             android:textSize="25dp"
             />
 
@@ -155,77 +173,77 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="25dp"
                 android:id="@+id/ypoint1"
                 android:text="0.0"
                 android:textColor="@color/black"
                 android:textSize="12sp"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:text="0.0"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint2"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:text="0.0"
                 android:layout_height="30dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint3"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:text="0.0"
                 android:layout_height="30dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint4"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:text="0.0"
                 android:layout_height="30dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint5"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:text="0.0"
                 android:layout_height="30dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint6"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:textSize="12sp"
                 android:text="0.0"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint7"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:textSize="12sp"
                 android:text="0.0"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint8"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="32dp"
                 android:textSize="12sp"
                 android:text="0.0"
                 android:textColor="@color/black"
                 android:id="@+id/ypoint9"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="28dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:text="0.0"
                 android:id="@+id/ypoint10"/>
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="32dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"

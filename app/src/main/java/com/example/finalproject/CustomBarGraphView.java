@@ -42,6 +42,7 @@ public class CustomBarGraphView extends View {
 
         Paint p = new Paint();
         p.setColor(Color.BLACK);
+        p.setStrokeWidth(3);
 
         //rgb values for bar color
         Paint barColor = new Paint();
@@ -72,9 +73,17 @@ public class CustomBarGraphView extends View {
 
     }
 
+    //point that comes in here is the totalMiles for the day
     public void addPoint(double point){
-       Date d = new Date();
-       int currHour = d.getHours();
+       //get currHour to know where to graph the miles
+        Date d = new Date();
+        int currHour = d.getHours();
+
+        //need to subtract miles from earlier hours to graph the mile in the hour
+       double milesToAdd = point;
+       for(int i=currHour-1;i>=0;i--){
+           milesToAdd-=milesEachHour[i];
+       }
        milesEachHour[currHour] = point;
 
     }

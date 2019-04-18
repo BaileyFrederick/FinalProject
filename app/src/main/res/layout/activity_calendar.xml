@@ -24,7 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginLeft="80dp"
-            android:text="Calendar"
+            android:text="CALENDAR"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="25dp"/>
         <Button
             android:layout_width="30dp"

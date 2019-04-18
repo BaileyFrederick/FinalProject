@@ -31,7 +31,7 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     CustomBarGraphView barGraph;
     int steps = 0;
 
-    DatabaseHandler dbh;
+    //DatabaseHandler dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +62,14 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         weight = (TextView) findViewById(R.id.weight);
         barGraph = (CustomBarGraphView) findViewById(R.id.bargraph);
 
-        dbh = new DatabaseHandler(getApplicationContext());
+        //dbh = new DatabaseHandler(getApplicationContext());
         //dbh.addHealthInfo(this);
         //int b = dbh.getAllHealthInputs().size();
         //Log.v("MY_TAG", "HEALTH INPUT SIZE= "+b);
         //SQLiteDatabase db = this.openOrCreateDatabase("GlobalDB", Context.MODE_PRIVATE, null);
         //dbh.onCreate(db);
 
-
-        List<String[]> toSet = dbh.getAllHealthInputs();
+       /* List<String[]> toSet = dbh.getAllHealthInputs();
         if(toSet.size()>0) {
             int max = 0;
             int maxIndex = 0;
@@ -87,6 +86,8 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
             height.setText(toSet.get(maxIndex)[5]);
             weight.setText(toSet.get(maxIndex)[6]);
         }
+        */
+       FirebaseHandler fb = new FirebaseHandler();
     }
 
     @Override
@@ -152,7 +153,10 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     }
 
     public void goBack(View v){
-        dbh.addHealthInfo(this);
+
+
+
+        //dbh.addHealthInfo(this);
         Intent x = new Intent(this, MainActivity.class);
         startActivity(x);
     }
