@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class HealthActivity extends AppCompatActivity implements SensorEventListener {
@@ -30,6 +33,8 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     TextView weight;
     CustomBarGraphView barGraph;
     int steps = 0;
+
+    FirebaseHandler fb;
 
     //DatabaseHandler dbh;
 
@@ -87,7 +92,10 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
             weight.setText(toSet.get(maxIndex)[6]);
         }
         */
-       FirebaseHandler fb = new FirebaseHandler();
+       fb = new FirebaseHandler();
+
+
+
     }
 
     @Override
@@ -154,9 +162,19 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
 
     public void goBack(View v){
 
+        /*Date d = new Date();
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+        */
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date d = new Date();
+        String date = dateFormat.format(d);
 
         //dbh.addHealthInfo(this);
+        EventHealth e = new EventHealth(date, step.getText().toString(), miles.getText().toString(), calories.getText().toString());
+        fb.addHealthEvent(e);
         Intent x = new Intent(this, MainActivity.class);
         startActivity(x);
     }
