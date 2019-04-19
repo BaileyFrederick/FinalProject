@@ -46,9 +46,9 @@ private FirebaseDatabase mDatabase;
     }
 
 
-    public void addHealthEvent(Event e){
+    public void addHealthEvent(EventHealth e){
         DatabaseReference myRef = mDatabase.getReference("Health");
-        myRef.child(e.d.toString()).setValue(e);
+        myRef.child(e.formattedDate).setValue(e);
     }
 
 
