@@ -121,7 +121,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         if(!open) {
             c.setEnabled(false);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1300);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1400);
             //top shows time
             //height duration
             params.setMargins(((width / 2) - 400), 194, 0, 0);
@@ -161,12 +161,12 @@ public class CalendarActivity extends AppCompatActivity {
         String des = description.getText().toString();
         String loc = location.getText().toString();
         String tempDate;
-        if(datePicker.getMonth() < 10){
-            tempDate = "" + datePicker.getYear() + "/0" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+        if(datePicker.getMonth()+1 < 10){
+            tempDate = "" + datePicker.getYear() + "/0" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
         }else {
-            tempDate = "" + datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+            tempDate = "" + datePicker.getYear() + "/" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
         }
-        int mins = (hourNP.getValue()-1)*60 + (minNP.getValue()-1);
+        int mins = (hourNP.getValue()) * 60 + (minNP.getValue() - 1);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date d = new Date();
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");

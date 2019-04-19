@@ -15,15 +15,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Location"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/locET"/>
     <TimePicker
         android:layout_width="250dp"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:id="@+id/tp"/>
     <DatePicker
         android:layout_width="250dp"
-        android:layout_height="75dp"
+        android:layout_height="90dp"
         android:id="@+id/dp"
         android:datePickerMode="spinner"
         android:calendarViewShown="false"></DatePicker>
@@ -37,7 +37,7 @@
             android:text="Duration"/>
        <NumberPicker
            android:layout_width="50dp"
-           android:layout_height="50dp"
+           android:layout_height="65dp"
            android:id="@+id/hour">
 
        </NumberPicker>
@@ -48,7 +48,7 @@
             android:textSize="30dp"/>
         <NumberPicker
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:id="@+id/minute"></NumberPicker>
 
 
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="5dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

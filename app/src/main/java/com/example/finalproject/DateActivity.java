@@ -3,7 +3,9 @@ package com.example.finalproject;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DateActivity extends AppCompatActivity {
     FrameLayout v;
@@ -32,8 +40,10 @@ public class DateActivity extends AppCompatActivity {
     LayoutInflater inflater;
     View customView;
     FirebaseHandler f = new FirebaseHandler();
+    private FirebaseDatabase mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date);
         Bundle bundle = getIntent().getExtras();
@@ -45,7 +55,29 @@ public class DateActivity extends AppCompatActivity {
         TextView dayText = (TextView) findViewById(R.id.dayTV);
         dayText.setText(day);
 
-        setUp(date);
+        //setUp(date);
+
+        final DatabaseReference myRef = mDatabase.getReference("Calendar");
+        final List<Event> list = new ArrayList<Event>();
+        final AtomicBoolean done = new AtomicBoolean(false);
+        myRef.child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Event e = noteDataSnapshot.getValue(Event.class);
+                    Log.v("MYTAG",""+e.desc);
+                    addEventView(e);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
 
         l  = findViewById(R.id.main);
