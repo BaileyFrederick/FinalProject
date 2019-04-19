@@ -13,6 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
 public class DateActivity extends AppCompatActivity {
     FrameLayout v;
 
@@ -24,31 +31,29 @@ public class DateActivity extends AppCompatActivity {
     FrameLayout l;
     LayoutInflater inflater;
     View customView;
+    FirebaseHandler f = new FirebaseHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date);
+        Bundle bundle = getIntent().getExtras();
+        Date d = (Date) bundle.get("Date");
+        SimpleDateFormat formater = new SimpleDateFormat("MMMM dd");
+        String day = formater.format(d);
+        SimpleDateFormat dbformater = new SimpleDateFormat("yyyy/MM/dd");
+        String date = dbformater.format(d);
+        TextView dayText = (TextView) findViewById(R.id.dayTV);
+        dayText.setText(day);
+
+        setUp(date);
+
 
         l  = findViewById(R.id.main);
         inflater  = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         customView  = inflater.inflate(R.layout.activity_event, null);
 
         //Get the info for the day
-        //add views for each one at specific time
-        display = getWindowManager(). getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        width = size. x;
-        height = size. y;
-        v = findViewById(R.id.fl);
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View customView = inflater.inflate(R.layout.activity_custom, null);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(750,300);
-        //top shows time
-        //height duration
-        params.setMargins(75, 0, 0, 0);
-        customView.setLayoutParams(params);
-        v.addView(customView);
+
     }
 
     public void Add(View v){
@@ -70,5 +75,33 @@ public class DateActivity extends AppCompatActivity {
 
     }
 
+    public void setUp(String d){
+        List<Event> e = f.getEvents(d);
+        for(int i =0; i < e.size(); i++){
+            addEventView(e.get(i));
+        }
+    }
 
+    public void addEventView(Event event){
+        //add views for each one at specific time
+        display = getWindowManager(). getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size. x;
+        height = size. y;
+        v = findViewById(R.id.fl);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View customView = inflater.inflate(R.layout.activity_custom, null);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(750,300);
+        //top shows time
+        //height duration
+        params.setMargins(75, 0, 0, 0);
+        customView.setLayoutParams(params);
+        v.addView(customView);
+    }
+
+
+    public void addE(View view) {
+
+    }
 }

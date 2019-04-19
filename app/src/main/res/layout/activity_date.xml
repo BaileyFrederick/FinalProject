@@ -24,7 +24,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="10dp"
-            android:text="March 6th"
+            android:id="@+id/dayTV"
             android:textSize="25dp"/>
         <Button
             android:layout_width="30dp"

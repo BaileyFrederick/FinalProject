@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -44,10 +47,21 @@ public class CalendarActivity extends AppCompatActivity {
     FrameLayout l;
     LayoutInflater inflater;
     View customView;
+
     TimePicker timePicker;
     NumberPicker hourNP;
     NumberPicker minNP;
-
+    EditText description;
+    EditText location;
+    DatePicker datePicker;
+    FirebaseHandler f = new FirebaseHandler();
+    CheckBox sun;
+    CheckBox m;
+    CheckBox t;
+    CheckBox w;
+    CheckBox th;
+    CheckBox fr;
+    CheckBox s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,19 +78,6 @@ public class CalendarActivity extends AppCompatActivity {
         display.getSize(size);
         width = size. x;
         height = size. y;
-
-        FirebaseHandler f = new FirebaseHandler();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date d = new Date();
-        String date = dateFormat.format(d);
-        SimpleDateFormat dtf = new SimpleDateFormat("HH:mm:ss");
-        String t = dtf.format(d);
-        List<String> list = new ArrayList<String>();
-        list.add("T");
-        list.add("S");
-
-        Event e = new Event(date, "Class", "Sitterson", t, list);
-        f.addEvent(e);
 
 
         c.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -131,13 +132,22 @@ public class CalendarActivity extends AppCompatActivity {
             timePicker = (TimePicker) findViewById(R.id.tp);
             hourNP = (NumberPicker) findViewById(R.id.hour);
             minNP = (NumberPicker) findViewById(R.id.minute);
+            description = (EditText) findViewById(R.id.desET);
+            location = (EditText) findViewById(R.id.locET);
+            datePicker = (DatePicker) findViewById(R.id.dp);
             hourNP.setMinValue(0);
             hourNP.setMaxValue(24);
             minNP.setMinValue(0);
             minNP.setMaxValue(59);
             hourNP.setWrapSelectorWheel(true);
             minNP.setWrapSelectorWheel(true);
-
+            sun = (CheckBox) findViewById(R.id.checkSun);
+            m = (CheckBox) findViewById(R.id.checkM);
+            t = (CheckBox) findViewById(R.id.checkT);
+            w = (CheckBox) findViewById(R.id.checkW);
+            th = (CheckBox) findViewById(R.id.checkTh);
+            fr = (CheckBox) findViewById(R.id.checkF);
+            s = (CheckBox) findViewById(R.id.checkS);
 
         }else{
             c.setEnabled(true);
@@ -145,6 +155,48 @@ public class CalendarActivity extends AppCompatActivity {
             l.removeView(customView);
         }
 
+
+    }
+    public void addE(View v){
+        String des = description.getText().toString();
+        String loc = location.getText().toString();
+        String tempDate;
+        if(datePicker.getMonth() < 10){
+            tempDate = "" + datePicker.getYear() + "/0" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+        }else {
+            tempDate = "" + datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+        }
+        int mins = (hourNP.getValue()-1)*60 + (minNP.getValue()-1);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date d = new Date();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        String time = timeFormat.format(d);
+        String date = dateFormat.format(d);
+        List<String> list = new ArrayList<String>();
+        if(sun.isChecked()){
+            list.add("Sun");
+        }
+        if(m.isChecked()){
+            list.add("M");
+        }
+        if(t.isChecked()){
+            list.add("T");
+        }
+        if(w.isChecked()){
+            list.add("W");
+        }
+        if(th.isChecked()){
+            list.add("Th");
+        }
+        if(fr.isChecked()){
+            list.add("F");
+        }
+        if(s.isChecked()){
+            list.add("S");
+        }
+
+        Event e = new Event(tempDate, des, loc, mins,time,list);
+        f.addEvent(e);
     }
 
 }
