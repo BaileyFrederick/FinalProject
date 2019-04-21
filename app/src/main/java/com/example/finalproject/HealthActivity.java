@@ -8,11 +8,18 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -33,26 +40,13 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
     TextView weight;
     CustomBarGraphView barGraph;
     int steps = 0;
-
     FirebaseHandler fb;
 
-    //DatabaseHandler dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
-        /*if(savedInstanceState!=null){
-            Log.v("MY_TAG", "SAVED INSTANCE STATE NOT NULL");
-            step.setText((CharSequence)(savedInstanceState.get("step")));
-            miles.setText((CharSequence)(savedInstanceState.get("miles")));
-            calories.setText((CharSequence)(savedInstanceState.get("calories")));
-            height.setText((CharSequence)(savedInstanceState.get("height")));
-            weight.setText((CharSequence)(savedInstanceState.get("weight")));
-
-        }
-        */
-
 
         step = (TextView) findViewById(R.id.step);
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -67,35 +61,52 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         weight = (TextView) findViewById(R.id.weight);
         barGraph = (CustomBarGraphView) findViewById(R.id.bargraph);
 
-        //dbh = new DatabaseHandler(getApplicationContext());
-        //dbh.addHealthInfo(this);
-        //int b = dbh.getAllHealthInputs().size();
-        //Log.v("MY_TAG", "HEALTH INPUT SIZE= "+b);
-        //SQLiteDatabase db = this.openOrCreateDatabase("GlobalDB", Context.MODE_PRIVATE, null);
-        //dbh.onCreate(db);
 
-       /* List<String[]> toSet = dbh.getAllHealthInputs();
-        if(toSet.size()>0) {
-            int max = 0;
-            int maxIndex = 0;
-            for (int i = 0; i < toSet.size(); i++) {
-                if (Integer.valueOf(toSet.get(i)[2]) > max) {
-                    max = Integer.valueOf(toSet.get(i)[2]);
-                    maxIndex = i;
+        fb = new FirebaseHandler();
+        final DatabaseReference myRef = fb.mDatabase.getReference("Health");
+
+        Calendar now = Calendar.getInstance();
+        final int year = now.get(Calendar.YEAR);
+        final String yearInString = String.valueOf(year);
+        int month = now.get(Calendar.MONTH)+1;
+        String monthInString = String.valueOf(month);
+        if(month<=9){
+            monthInString="0"+monthInString;
+        }
+        final String monthInStringFinal=monthInString;
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        final String dayInString = String.valueOf(day);
+        final String dashedFormatDay = monthInStringFinal + "-" + dayInString + "-" + yearInString;
+
+        String order = yearInString + "/" + monthInString + "/" + dayInString;
+        Query healthQuery = myRef.orderByChild(order);
+
+        healthQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    EventHealth e = noteDataSnapshot.getValue(EventHealth.class);
+
+                    if(e.formattedDate!=null && e.formattedDate.equals(dashedFormatDay)) {
+                        TextView stepsTV = (TextView) findViewById(R.id.step);
+                        stepsTV.setText(e.getSteps());
+                        TextView milesTV = (TextView) findViewById(R.id.miles);
+                        milesTV.setText(e.getMiles());
+                        TextView caloriesTV = (TextView) findViewById(R.id.calories);
+                        caloriesTV.setText(e.getCalories());
+                        TextView heightTV = (TextView) findViewById(R.id.height);
+                        heightTV.setText(e.getHeight());
+                        TextView weightTV = (TextView) findViewById(R.id.weight);
+                        weightTV.setText(e.getWeight());
+                        steps=Integer.valueOf(e.getSteps());
+                    }
                 }
             }
-
-            step.setText(toSet.get(maxIndex)[2]);
-            miles.setText(toSet.get(maxIndex)[3]);
-            calories.setText(toSet.get(maxIndex)[4]);
-            height.setText(toSet.get(maxIndex)[5]);
-            weight.setText(toSet.get(maxIndex)[6]);
-        }
-        */
-       fb = new FirebaseHandler();
-
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("MY_TAG", "onCancelled", databaseError.toException());
+            }
+        });
     }
 
     @Override
@@ -162,28 +173,17 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
 
     public void goBack(View v){
 
-        /*Date d = new Date();
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        String formattedDate = df.format(c);
-        */
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         Date d = new Date();
         String date = dateFormat.format(d);
 
-        //dbh.addHealthInfo(this);
-        EventHealth e = new EventHealth(date, step.getText().toString(), miles.getText().toString(), calories.getText().toString());
+        EventHealth e = new EventHealth(calories.getText().toString(),date,miles.getText().toString(), step.getText().toString(), height.getText().toString(), weight.getText().toString());
+        //Log.v("MY_TAG", "DATE="+date);
         fb.addHealthEvent(e);
         Intent x = new Intent(this, MainActivity.class);
         startActivity(x);
     }
 
-    /*@Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        textView.setText(savedInstanceState.getString(TEXT_VIEW_KEY));
-    }
-    */
 
     // invoked when the activity may be temporarily destroyed, save the instance state here
     @Override

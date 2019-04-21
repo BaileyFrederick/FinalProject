@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:hint="Enter Here"
+            android:hint="Enter inches"
             android:id="@+id/height"
             />
         <TextView
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:hint="Enter Here"
+            android:hint="Enter lbs."
             android:id="@+id/weight"
             />
 
@@ -168,7 +168,7 @@
             android:textColor="@color/black"/>
 
         <LinearLayout
-            android:layout_width="20dp"
+            android:layout_width="26dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
