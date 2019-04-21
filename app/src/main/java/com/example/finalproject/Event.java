@@ -9,18 +9,20 @@ public class Event {
     public String d;
     public String desc;
     public String loc;
-    public String t;
     public List<String> days;
+    public int duration;
+    public String time;
 
     public Event(){
 
     }
 
-    public Event(String d, String des, String loc, String t, List<String> days){
+    public Event(String d, String des, String loc, int duration, String t, List<String> days){
         this.d = d;
         this.desc = des;
         this.loc = loc;
-        this.t = t;
         this.days = days;
+        this.duration = duration;
+        this.time = t;
     }
 }
