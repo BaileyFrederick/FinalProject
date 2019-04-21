@@ -42,12 +42,12 @@ public class CustomBarGraphView extends View {
 
         Paint p = new Paint();
         p.setColor(Color.BLACK);
-        p.setStrokeWidth(3);
+        p.setStrokeWidth(2);
 
         //rgb values for bar color
         Paint barColor = new Paint();
         barColor.setColor(Color.rgb(123,175,212));
-        barColor.setStrokeWidth(8);
+        barColor.setStrokeWidth(9);
 
         float scaleX = (float) (width / 12);
         float scaleY = (float) (height / 20);
@@ -84,7 +84,7 @@ public class CustomBarGraphView extends View {
        for(int i=currHour-1;i>=0;i--){
            milesToAdd-=milesEachHour[i];
        }
-       milesEachHour[currHour] = point;
+       milesEachHour[currHour] = milesToAdd;
 
     }
 
