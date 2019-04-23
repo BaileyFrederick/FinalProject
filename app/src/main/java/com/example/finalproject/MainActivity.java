@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity{
     private Intent healthIntent;
 
     private HealthActivity h;
+    boolean b = false;
+    String activity;
 
 
     @Override
@@ -109,9 +111,19 @@ public class MainActivity extends AppCompatActivity{
                     txtSpeechInput.setText(result.get(0));
                     Rammy r = new Rammy();
                     String output = r.read(result.get(0).toString());
+                    if(b){
+                        r.issueCommand(output);
+                        b = false;
+
+                    }
                     if(output != null) {
-                        Toast.makeText(this,"" + output, Toast.LENGTH_SHORT);
-                        promptSpeechInput();
+                        if(output.equals("What time and date?")){
+                            b = true;
+                        }
+                        if(b) {
+                            Toast.makeText(this, "" + output, Toast.LENGTH_SHORT).show();
+                            promptSpeechInput();
+                        }
                     }
                     /*
                     if(output != null){
@@ -131,6 +143,8 @@ public class MainActivity extends AppCompatActivity{
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.append("\n" + result.get(0));
+                    Rammy r = new Rammy();
+                    r.issueCommand(result.get(0));
 
                 }
 

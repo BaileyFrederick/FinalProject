@@ -33,6 +33,10 @@ public class DateActivity extends AppCompatActivity {
     int width;
     int height;
     boolean open = false;
+    TextView e;
+    TextView loc;
+    TextView te;
+    TextView d;
 
     FrameLayout l;
     LayoutInflater inflater;
@@ -135,17 +139,29 @@ public class DateActivity extends AppCompatActivity {
         }
 
 
+
         params.setMargins(75, (int)t, 0, 0);
         customView.setLayoutParams(params);
-        TextView e = (TextView) findViewById(R.id.eventTV);
-        TextView l = (TextView) findViewById(R.id.locTV);
-        TextView te = (TextView) findViewById(R.id.timeTV);
-        TextView d = (TextView) findViewById(R.id.durTV);
-        e.setText(event.desc);
-        l.setText(event.loc);
-        te.setText(event.time);
-        d.setText(event.duration);
         v.addView(customView);
+        e = (TextView) findViewById(R.id.eventTV);
+        loc = (TextView) findViewById(R.id.locTV);
+        te = (TextView) findViewById(R.id.timeTV);
+        d = (TextView) findViewById(R.id.durTV);
+        e.setText(event.desc);
+        loc.setText(event.loc);
+        if(time<=1200){
+            event.time = event.time+"AM";
+        }else{
+            int temp =time-1200;
+            String s = ""+temp;
+            if(s.length() == 3){
+                s = "0"+s;
+            }
+            s = s.substring(0,2)+":"+s.substring(2,4)+"PM";
+            event.time = s;
+        }
+        te.setText(event.time);
+        d.setText(""+event.duration+" minutes");
     }
 
 
