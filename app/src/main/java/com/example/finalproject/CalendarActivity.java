@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -121,7 +122,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         if(!open) {
             c.setEnabled(false);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1300);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1400);
             //top shows time
             //height duration
             params.setMargins(((width / 2) - 400), 194, 0, 0);
@@ -162,16 +163,32 @@ public class CalendarActivity extends AppCompatActivity {
         String loc = location.getText().toString();
         String tempDate;
         if(datePicker.getMonth() < 10){
-            tempDate = "" + datePicker.getYear() + "/0" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+            tempDate = "" + datePicker.getYear() + "/0" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
         }else {
-            tempDate = "" + datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+            tempDate = "" + datePicker.getYear() + "/" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
         }
-        int mins = (hourNP.getValue()-1)*60 + (minNP.getValue()-1);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date d = new Date();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        String time = timeFormat.format(d);
-        String date = dateFormat.format(d);
+        int mins = hourNP.getValue()*60 + minNP.getValue();
+
+        String time;
+        if(Build.VERSION.SDK_INT < 23){
+            int getHour = timePicker.getCurrentHour();
+            int getMinute = timePicker.getCurrentMinute();
+            if(getMinute == 0){
+                time = getHour+":"+getMinute+"0";
+            }else{
+                time = getHour+":"+getMinute;
+            }
+
+        } else{
+            int getHour = timePicker.getHour();
+            int getMinute = timePicker.getMinute();
+            if(getMinute == 0){
+                time = getHour+":"+getMinute+"0";
+            }else{
+                time = getHour+":"+getMinute;
+            }
+        }
+
         List<String> list = new ArrayList<String>();
         if(sun.isChecked()){
             list.add("Sun");

@@ -5,10 +5,31 @@
     android:background="@drawable/rounded_corner"
     android:backgroundTint="#BAF"
     android:orientation="vertical">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/ctv"
-    android:text="Test"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventTV"
+        android:textSize="20dp"
+        android:text="Event"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locTV"
+        android:textSize="15dp"
+        android:text="Location"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeTV"
+        android:textSize="15dp"
+        android:text="Time"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/durTV"
+        android:textSize="15dp"
+        android:text="Duration"/>
+
+
 
 </LinearLayout>
