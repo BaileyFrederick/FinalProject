@@ -3,32 +3,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@drawable/rounded_corner"
-    android:backgroundTint="#BAF"
+    android:backgroundTint="@color/carolinaBlue"
     android:orientation="vertical">
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/eventTV"
-        android:textSize="20dp"
-        android:text="Event"/>
-    <TextView
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventTV"
+            android:textSize="20dp"
+            android:text="Event"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/timeTV"
+            android:textSize="15dp"
+            android:text="Time"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/locTV"
-        android:textSize="15dp"
-        android:text="Location"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeTV"
-        android:textSize="15dp"
-        android:text="Time"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/durTV"
-        android:textSize="15dp"
-        android:text="Duration"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locTV"
+            android:textSize="15dp"
+            android:text="Location"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/durTV"
+            android:textSize="15dp"
+            android:text="Duration"/>
+    </LinearLayout>
 
 
 

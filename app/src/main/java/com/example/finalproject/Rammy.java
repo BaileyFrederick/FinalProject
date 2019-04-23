@@ -13,14 +13,14 @@ import java.util.Locale;
 public class Rammy {
 
     /*
-    Add event to calander-What day and time?-Month day @ time
     Directions to Location
     What is my next appointment
     How many steps have I walked
     How many calories have I burned
-
-
      */
+    String temp;
+
+    FirebaseHandler f = new FirebaseHandler();
 
     public Rammy(){
 
@@ -39,7 +39,7 @@ public class Rammy {
         for(int i = 0; i < words.size()-1; i++){
             switch (words.get(i)){
                 case "add":
-
+                    temp = input;
                     return "What time and date?";
                 case "Directions":
 
@@ -56,6 +56,15 @@ public class Rammy {
             }
         }
         return null;
+    }
+
+    public void addEvent(String Command){
+        temp.replace("add","");
+        temp.replace("to my calendar","");
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm");
+
+        Event e = new Event("",temp,"",60,"",null);
+        //f.addEvent();
     }
 
     public boolean issueCommand(String command){
@@ -81,6 +90,7 @@ public class Rammy {
                 }
             }
             //add event to database
+            int i = 0;
         }
         switch (command){
             case "directions":
