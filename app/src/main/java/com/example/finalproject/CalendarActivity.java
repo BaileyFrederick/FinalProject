@@ -56,13 +56,6 @@ public class CalendarActivity extends AppCompatActivity {
     EditText location;
     DatePicker datePicker;
     FirebaseHandler f = new FirebaseHandler();
-    CheckBox sun;
-    CheckBox m;
-    CheckBox t;
-    CheckBox w;
-    CheckBox th;
-    CheckBox fr;
-    CheckBox s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +115,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         if(!open) {
             c.setEnabled(false);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1400);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1200);
             //top shows time
             //height duration
             params.setMargins(((width / 2) - 400), 194, 0, 0);
@@ -142,13 +135,7 @@ public class CalendarActivity extends AppCompatActivity {
             minNP.setMaxValue(59);
             hourNP.setWrapSelectorWheel(true);
             minNP.setWrapSelectorWheel(true);
-            sun = (CheckBox) findViewById(R.id.checkSun);
-            m = (CheckBox) findViewById(R.id.checkM);
-            t = (CheckBox) findViewById(R.id.checkT);
-            w = (CheckBox) findViewById(R.id.checkW);
-            th = (CheckBox) findViewById(R.id.checkTh);
-            fr = (CheckBox) findViewById(R.id.checkF);
-            s = (CheckBox) findViewById(R.id.checkS);
+
 
         }else{
             c.setEnabled(true);
@@ -159,6 +146,8 @@ public class CalendarActivity extends AppCompatActivity {
 
     }
     public void addE(View v){
+        c.setEnabled(true);
+        l.removeView(customView);
         String des = description.getText().toString();
         String loc = location.getText().toString();
         String tempDate;
@@ -189,31 +178,10 @@ public class CalendarActivity extends AppCompatActivity {
             }
         }
 
-        List<String> list = new ArrayList<String>();
-        if(sun.isChecked()){
-            list.add("Sun");
-        }
-        if(m.isChecked()){
-            list.add("M");
-        }
-        if(t.isChecked()){
-            list.add("T");
-        }
-        if(w.isChecked()){
-            list.add("W");
-        }
-        if(th.isChecked()){
-            list.add("Th");
-        }
-        if(fr.isChecked()){
-            list.add("F");
-        }
-        if(s.isChecked()){
-            list.add("S");
-        }
 
-        Event e = new Event(tempDate, des, loc, mins,time,list);
+        Event e = new Event(tempDate, des, loc, mins,time);
         f.addEvent(e);
+
     }
 
 }

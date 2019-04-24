@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/carolinaBlue">
 
 
     <LinearLayout
@@ -82,11 +83,39 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/microphone"/>
     </GridLayout>
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/speech"
-        android:text="hi"/>
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:background="@drawable/ram"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/speech"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/navy"
+        android:layout_marginTop="5dp"
+        android:gravity="right">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@color/carolinaBlue"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/white"
+            android:text="Help"
+            android:onClick="help"/>
+
+    </LinearLayout>
 
 </LinearLayout>
