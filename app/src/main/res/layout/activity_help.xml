@@ -18,13 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:textColor="@color/white"
-        android:text="Add events to your calendar from the months page"/>
+        android:text="Add events to your calendar from the months page."/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:textColor="@color/white"
-        android:text="You can click on specific days to see what you have planned"/>
+        android:text="Click on specific days to see what you have planned."/>
 
 
 
@@ -40,9 +40,19 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:textColor="@color/white"
-        android:text="ENTER INFO HERE"/>
-
-
+        android:text="See location of next event based on calendar."/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:textColor="@color/white"
+        android:text="Get current location and directions to next event."/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:textColor="@color/white"
+        android:text="Add reminders based on location in top right corner."/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,7 +66,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:textColor="@color/white"
-        android:text="Keeps track of calories and steps each day"/>
+        android:text="Keeps track of calories and steps each day."
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:textColor="@color/white"
+        android:text="Graph of number of miles walked each hour."
+        />
 
 
 

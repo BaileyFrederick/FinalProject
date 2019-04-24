@@ -177,6 +177,11 @@ public class HealthActivity extends AppCompatActivity implements SensorEventList
         Date d = new Date();
         String date = dateFormat.format(d);
 
+        step.setText("8256");
+        miles.setText("4.43");
+        height.setText("64");
+        weight.setText("125");
+
         EventHealth e = new EventHealth(calories.getText().toString(),date,miles.getText().toString(), step.getText().toString(), height.getText().toString(), weight.getText().toString());
         //Log.v("MY_TAG", "DATE="+date);
         fb.addHealthEvent(e);

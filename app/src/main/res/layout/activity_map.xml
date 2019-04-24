@@ -41,6 +41,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Current Time: 2:30 pm"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:id="@+id/currenttime"
+            android:textSize="25dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Next Event Is At: "
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -52,20 +62,36 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text=" "
+            android:id="@+id/locationofnextevent"
             android:textSize="25dp"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
         android:text="Get Current Location"
         android:onClick="getCurrentLocation"
         android:layout_marginTop="15dp"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:text="Get Directions to Next Event"
+            android:onClick="getDirections"
+            android:layout_marginTop="15dp"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REMINDER: Don't forget to stretch before practice"
         android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="25dp"/>
 
     </LinearLayout>

@@ -15,10 +15,9 @@
         android:orientation="horizontal"
         android:background="@color/navy">
 
-        <Button
+        <TextView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background= "@drawable/menu"
             android:layout_marginLeft="5dp" />
 
         <LinearLayout
