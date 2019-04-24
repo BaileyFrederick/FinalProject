@@ -128,5 +128,13 @@ public TextView t;
 
     }
 
+
+    public void addReminderEvent(EventReminder er){
+        Log.v("MY_TAG", "IN ADD REMINDER EVENT");
+        DatabaseReference myRef = mDatabase.getReference("Reminders");
+        //Log.v("MY_TAG", "E.formattedDate= "+e.formattedDate);
+        myRef.child(er.location).setValue(er);
+    }
+
 }
 

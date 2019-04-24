@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/mapLayout">
 
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -26,23 +30,35 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="25dp"/>
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="110dp"
+            android:background="@drawable/add"
+            android:onClick="addPopup"/>
        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FROM: Current Location"
+            android:text="Next Event Is At: "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:id="@+id/nexteventisat"
             android:textSize="25dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TO: Eddie Smith Field House"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text=" "
             android:textSize="25dp"/>
 
-    <ImageView
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/campus"
+        android:layout_height="150dp"
+        android:text="Get Current Location"
+        android:onClick="getCurrentLocation"
         android:layout_marginTop="15dp"/>
 
     <TextView
@@ -52,4 +68,6 @@
         android:layout_marginTop="20dp"
         android:textSize="25dp"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
