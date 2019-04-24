@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
 
-    private TextView txtSpeechInput;
+    static TextView txtSpeechInput;
     private ImageView btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private DrawerLayout drawerLayout;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
     private HealthActivity h;
     boolean b = false;
     String activity;
+    static String temp;
 
 
     @Override
@@ -110,9 +111,9 @@ public class MainActivity extends AppCompatActivity{
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.setText(result.get(0));
                     Rammy r = new Rammy();
-                    String output = r.read(result.get(0).toString());
+                    String output = r.read(result.get(0));
                     if(b){
-                        r.issueCommand(output);
+                        r.addEvent(output, temp);
                         b = false;
 
                     }
@@ -176,6 +177,10 @@ public class MainActivity extends AppCompatActivity{
 
     public void foo(View v){
         Intent x = new Intent(this, CalendarActivity.class);
+        startActivity(x);
+    }
+    public void help(View v){
+        Intent x = new Intent(this, HelpActivity.class);
         startActivity(x);
     }
 }

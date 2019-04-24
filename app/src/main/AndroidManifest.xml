@@ -20,6 +20,7 @@
         <activity android:name=".DateActivity"></activity>
         <activity android:name=".HealthActivity"></activity>
         <activity android:name=".MapActivity"></activity>
+        <activity android:name=".HelpActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

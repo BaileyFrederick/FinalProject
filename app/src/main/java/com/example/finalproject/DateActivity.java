@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -83,25 +84,6 @@ public class DateActivity extends AppCompatActivity {
 
     }
 
-    public void Add(View v){
-        //add to db
-        //add view
-
-        if(!open) {
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1500);
-            //top shows time
-            //height duration
-            params.setMargins(((width / 2) - 400), 194, 0, 0);
-            customView.setLayoutParams(params);
-            l.addView(customView);
-            open = true;
-        }else{
-            l.removeView(customView);
-            open = false;
-        }
-
-    }
-
     public void setUp(String d){
 
     }
@@ -117,12 +99,13 @@ public class DateActivity extends AppCompatActivity {
         v = findViewById(R.id.fl);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View customView = inflater.inflate(R.layout.activity_custom, null);
-        double dur = ((double)(event.duration/60))*190;
+        double dur = (((double)(event.duration))/60)*190;
 
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(750,190);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(750,(int)dur);
         //top shows time
         //height duration
-        int time = Integer.parseInt(event.time.replace(":",""));
+        String temp = event.time.replace(":","");
+        int time = Integer.parseInt(temp);
         double t = ((double)time)/100;
         t = t*190;
         t = t+30;
@@ -142,13 +125,38 @@ public class DateActivity extends AppCompatActivity {
 
         params.setMargins(75, (int)t, 0, 0);
         customView.setLayoutParams(params);
+        TextView desc= new TextView(this);
+        desc.setText(event.desc);
+        desc.setPadding(85, (int)t+10, 0, 0);
+        desc.setTypeface(null, Typeface.BOLD);
+        desc.measure(0,0);
+        TextView timeView = new TextView(this);
+        timeView.setText(event.time);
+        timeView.setPadding(15+desc.getMeasuredWidth(), (int)t+10, 0, 0);
+
+        TextView loc= new TextView(this);
+        loc.setText(event.loc);
+        loc.setPadding(85, (int)t+60, 0, 0);
+        loc.measure(0,0);
+        TextView durView = new TextView(this);
+        durView.setText(event.duration+" minutes");
+        durView.setPadding(15+loc.getMeasuredWidth(), (int)t+60, 0, 0);
+
         v.addView(customView);
-        e = (TextView) findViewById(R.id.eventTV);
+        v.addView(desc);
+        v.addView(timeView);
+        v.addView(loc);
+        v.addView(durView);
+
+
+
+        /*e = (TextView) findViewById(R.id.eventTV);
         loc = (TextView) findViewById(R.id.locTV);
         te = (TextView) findViewById(R.id.timeTV);
         d = (TextView) findViewById(R.id.durTV);
         e.setText(event.desc);
         loc.setText(event.loc);
+
         if(time<=1200){
             event.time = event.time+"AM";
         }else{
@@ -162,6 +170,7 @@ public class DateActivity extends AppCompatActivity {
         }
         te.setText(event.time);
         d.setText(""+event.duration+" minutes");
+        */
     }
 
 
