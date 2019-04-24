@@ -1,8 +1,18 @@
 package com.example.finalproject;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Build;
+import android.os.SystemClock;
 import android.speech.RecognizerIntent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +29,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
@@ -28,8 +41,6 @@ public class MainActivity extends AppCompatActivity{
     private ImageView btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private DrawerLayout drawerLayout;
-
-    private DatabaseReference mDatabase;
   
     private boolean heartOpened = false;
 
@@ -39,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
     boolean b = false;
     String activity;
     static String temp;
-
+    private FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +59,46 @@ public class MainActivity extends AppCompatActivity{
         //mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDatabase.child("message").setValue("Te");
 
+        mDatabase = FirebaseDatabase.getInstance();
         // Write a message to the database
         new FirebaseHandler();
 
+        final DatabaseReference myRef = mDatabase.getReference("Calendar");
+        final List<Event> list = new ArrayList<Event>();
+        Date d = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd");
+        String date = ft.format(d);
+        myRef.child(date).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Event e = noteDataSnapshot.getValue(Event.class);
+                    String h = e.time.substring(0,e.time.indexOf(":"));
+                    String m = e.time.substring(e.time.indexOf(":")+1,e.time.length());
+                    int intH = Integer.parseInt(h);
+                    int intM = Integer.parseInt(m);
+                    Date d = new Date();
+                    SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+                    String curS = sf.format(d);
+                    String curh = curS.substring(0,curS.indexOf(":"));
+                    String curm = curS.substring(curS.indexOf(":")+1,curS.length());
+                    int intcurH = Integer.parseInt(curh);
+                    int intcurM = Integer.parseInt(curm);
+                    if(intcurH<=intH && intcurM<intM) {
+                        int a = intH - intcurH;
+                        a = a * 60;
+                        int b = intM - intcurM;
+                        a = a + b;
+                        scheduleNotification(getNotification(e), a * 1000*60);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         txtSpeechInput = (TextView) findViewById(R.id.speech);
@@ -65,6 +113,42 @@ public class MainActivity extends AppCompatActivity{
         });
 
     }
+
+    public void setReminder(Event e){
+        PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+        Resources r = getResources();
+        Notification notification = new NotificationCompat.Builder(this)
+                .setTicker("Test1")
+                .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                .setContentTitle(e.desc)
+                .setContentText("Don't forget about " + e.desc + " at " +e.time)
+                .setContentIntent(pi)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(0, notification);
+    }
+    private void scheduleNotification(Notification notification, int delay) {
+
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+    private Notification getNotification(Event e) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle("Scheduled Notification");
+        builder.setContentText(e.desc);
+        builder.setSmallIcon(R.drawable.calendar);
+        return builder.build();
+    }
+
 
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
