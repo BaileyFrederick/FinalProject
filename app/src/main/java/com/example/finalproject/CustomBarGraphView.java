@@ -61,6 +61,10 @@ public class CustomBarGraphView extends View {
     }
 
         float scaleBars = (float) (width/36);
+        milesEachHour[10] = 1.21;
+        milesEachHour[12] = 1.04;
+        milesEachHour[13] = 1.32;
+        milesEachHour[14] = 0.75;
 
         for(int i=0; i<24; i++){
             //canvas.drawLine((float) (i * scaleBars), (float) (0), (float) (i * scaleBars), (float) (10*milesEachHour[i]), barColor);

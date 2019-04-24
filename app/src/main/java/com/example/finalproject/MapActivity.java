@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -24,9 +25,17 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -40,11 +49,14 @@ public class MapActivity extends AppCompatActivity {
     EditText reminder;
     EditText locationReminder;
     FirebaseHandler fb;
+    private FirebaseDatabase mDatabase;
     Geocoder gc;
     Intent addressCurrLocation;
     private AddressResultReceiver resultReceiver;
     private FusedLocationProviderClient fusedLocationClient;
     Location lastKnownLocation;
+    TextView nextEventIsAt;
+    TextView locationofnextevent;
 
 
     @Override
@@ -67,6 +79,43 @@ public class MapActivity extends AppCompatActivity {
         fb = new FirebaseHandler();
         final DatabaseReference myRef = fb.mDatabase.getReference("Reminders");
 
+        /*mDatabase = FirebaseDatabase.getInstance();
+        setContentView(R.layout.activity_date);
+        Bundle bundle = getIntent().getExtras();
+        Date d = new Date();
+        SimpleDateFormat formater = new SimpleDateFormat("MMMM dd");
+        String day = formater.format(d);
+        SimpleDateFormat dbformater = new SimpleDateFormat("yyyy/MM/dd");
+        String date = dbformater.format(d);
+        TextView dayText = (TextView) findViewById(R.id.dayTV);
+        dayText.setText(day);
+
+
+        nextEventIsAt = (TextView) findViewById(R.id.nexteventisat);
+
+
+        final DatabaseReference myRef2 = mDatabase.getReference("Calendar");
+        final List<Event> list = new ArrayList<>();
+        myRef2.child(date).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Event e = noteDataSnapshot.getValue(Event.class);
+                    nextEventIsAt.setText(e.loc);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        */
+
+        locationofnextevent = (TextView) findViewById(R.id.locationofnextevent);
+        locationofnextevent.setText("Track at 3:00");
+
+
     }
 
     public void backToMain(View v){
@@ -76,8 +125,6 @@ public class MapActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outstate){
-
-
 
         super.onSaveInstanceState(outstate);
 
@@ -159,5 +206,11 @@ public class MapActivity extends AppCompatActivity {
             l.removeView(customView);
             nextEvent.setText("Next Event Is At:");
         }
+    }
+
+    public void getDirections(View v){
+        Intent x = new Intent(this, DirectionsActivity.class);
+        startActivity(x);
+
     }
 }
