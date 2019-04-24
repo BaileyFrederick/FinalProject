@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -55,13 +56,6 @@ public class CalendarActivity extends AppCompatActivity {
     EditText location;
     DatePicker datePicker;
     FirebaseHandler f = new FirebaseHandler();
-    CheckBox sun;
-    CheckBox m;
-    CheckBox t;
-    CheckBox w;
-    CheckBox th;
-    CheckBox fr;
-    CheckBox s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +115,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         if(!open) {
             c.setEnabled(false);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1300);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(800, 1200);
             //top shows time
             //height duration
             params.setMargins(((width / 2) - 400), 194, 0, 0);
@@ -141,13 +135,7 @@ public class CalendarActivity extends AppCompatActivity {
             minNP.setMaxValue(59);
             hourNP.setWrapSelectorWheel(true);
             minNP.setWrapSelectorWheel(true);
-            sun = (CheckBox) findViewById(R.id.checkSun);
-            m = (CheckBox) findViewById(R.id.checkM);
-            t = (CheckBox) findViewById(R.id.checkT);
-            w = (CheckBox) findViewById(R.id.checkW);
-            th = (CheckBox) findViewById(R.id.checkTh);
-            fr = (CheckBox) findViewById(R.id.checkF);
-            s = (CheckBox) findViewById(R.id.checkS);
+
 
         }else{
             c.setEnabled(true);
@@ -158,45 +146,42 @@ public class CalendarActivity extends AppCompatActivity {
 
     }
     public void addE(View v){
+        c.setEnabled(true);
+        l.removeView(customView);
         String des = description.getText().toString();
         String loc = location.getText().toString();
         String tempDate;
         if(datePicker.getMonth() < 10){
-            tempDate = "" + datePicker.getYear() + "/0" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+            tempDate = "" + datePicker.getYear() + "/0" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
         }else {
-            tempDate = "" + datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth();
+            tempDate = "" + datePicker.getYear() + "/" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
         }
-        int mins = (hourNP.getValue()-1)*60 + (minNP.getValue()-1);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date d = new Date();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        String time = timeFormat.format(d);
-        String date = dateFormat.format(d);
-        List<String> list = new ArrayList<String>();
-        if(sun.isChecked()){
-            list.add("Sun");
-        }
-        if(m.isChecked()){
-            list.add("M");
-        }
-        if(t.isChecked()){
-            list.add("T");
-        }
-        if(w.isChecked()){
-            list.add("W");
-        }
-        if(th.isChecked()){
-            list.add("Th");
-        }
-        if(fr.isChecked()){
-            list.add("F");
-        }
-        if(s.isChecked()){
-            list.add("S");
+        int mins = hourNP.getValue()*60 + minNP.getValue();
+
+        String time;
+        if(Build.VERSION.SDK_INT < 23){
+            int getHour = timePicker.getCurrentHour();
+            int getMinute = timePicker.getCurrentMinute();
+            if(getMinute == 0){
+                time = getHour+":"+getMinute+"0";
+            }else{
+                time = getHour+":"+getMinute;
+            }
+
+        } else{
+            int getHour = timePicker.getHour();
+            int getMinute = timePicker.getMinute();
+            if(getMinute == 0){
+                time = getHour+":"+getMinute+"0";
+            }else{
+                time = getHour+":"+getMinute;
+            }
         }
 
-        Event e = new Event(tempDate, des, loc, mins,time,list);
+
+        Event e = new Event(tempDate, des, loc, mins,time);
         f.addEvent(e);
+
     }
 
 }

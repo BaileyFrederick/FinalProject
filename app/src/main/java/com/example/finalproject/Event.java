@@ -9,7 +9,6 @@ public class Event {
     public String d;
     public String desc;
     public String loc;
-    public List<String> days;
     public int duration;
     public String time;
 
@@ -17,11 +16,10 @@ public class Event {
 
     }
 
-    public Event(String d, String des, String loc, int duration, String t, List<String> days){
+    public Event(String d, String des, String loc, int duration, String t){
         this.d = d;
         this.desc = des;
         this.loc = loc;
-        this.days = days;
         this.duration = duration;
         this.time = t;
     }

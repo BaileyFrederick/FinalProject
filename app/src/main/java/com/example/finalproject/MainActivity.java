@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
 
-    private TextView txtSpeechInput;
+    static TextView txtSpeechInput;
     private ImageView btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private DrawerLayout drawerLayout;
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity{
     private Intent healthIntent;
 
     private HealthActivity h;
+    boolean b = false;
+    String activity;
+    static String temp;
 
 
     @Override
@@ -108,10 +111,20 @@ public class MainActivity extends AppCompatActivity{
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.setText(result.get(0));
                     Rammy r = new Rammy();
-                    String output = r.read(result.get(0).toString());
+                    String output = r.read(result.get(0));
+                    if(b){
+                        r.addEvent(output, temp);
+                        b = false;
+
+                    }
                     if(output != null) {
-                        Toast.makeText(this,"" + output, Toast.LENGTH_SHORT);
-                        promptSpeechInput();
+                        if(output.equals("What time and date?")){
+                            b = true;
+                        }
+                        if(b) {
+                            Toast.makeText(this, "" + output, Toast.LENGTH_SHORT).show();
+                            promptSpeechInput();
+                        }
                     }
                     /*
                     if(output != null){
@@ -131,6 +144,8 @@ public class MainActivity extends AppCompatActivity{
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.append("\n" + result.get(0));
+                    Rammy r = new Rammy();
+                    r.issueCommand(result.get(0));
 
                 }
 
@@ -162,6 +177,10 @@ public class MainActivity extends AppCompatActivity{
 
     public void foo(View v){
         Intent x = new Intent(this, CalendarActivity.class);
+        startActivity(x);
+    }
+    public void help(View v){
+        Intent x = new Intent(this, HelpActivity.class);
         startActivity(x);
     }
 }
