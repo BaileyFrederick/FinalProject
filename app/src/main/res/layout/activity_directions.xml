@@ -18,8 +18,9 @@
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="1. Go down E. Cameron Ave."
+        android:text="To: "
         android:textColor="@color/black"
+        android:id="@+id/toDirections"
         android:textStyle="bold"
         android:textSize="25dp"/>
     <TextView
@@ -27,27 +28,20 @@
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="Turn Right on Raleigh St. "
+        android:text="From: "
+        android:id="@+id/fromDirections"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="25dp"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="Turn Left on South Road "
+        android:text=""
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="25dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:text="Track will be on the right"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:id="@+id/directions"
         android:textSize="25dp"/>
 
 </LinearLayout>

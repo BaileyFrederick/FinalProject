@@ -7,9 +7,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -57,8 +60,11 @@ public class MapActivity extends AppCompatActivity {
     Location lastKnownLocation;
     TextView nextEventIsAt;
     TextView locationofnextevent;
+    TextView currenttime;
+    TextView reminderPrint;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,23 +81,36 @@ public class MapActivity extends AppCompatActivity {
         height = size.y;
 
         nextEvent = (TextView) findViewById(R.id.nexteventisat);
+        reminderPrint = (TextView) findViewById(R.id.reminderPrint) ;
+
 
         fb = new FirebaseHandler();
-        final DatabaseReference myRef = fb.mDatabase.getReference("Reminders");
 
-        /*mDatabase = FirebaseDatabase.getInstance();
-        setContentView(R.layout.activity_date);
-        Bundle bundle = getIntent().getExtras();
+        mDatabase = FirebaseDatabase.getInstance();
+        //setContentView(R.layout.activity_date);
+       // Bundle bundle = getIntent().getExtras();
         Date d = new Date();
         SimpleDateFormat formater = new SimpleDateFormat("MMMM dd");
-        String day = formater.format(d);
+        //String day = formater.format(d);
         SimpleDateFormat dbformater = new SimpleDateFormat("yyyy/MM/dd");
         String date = dbformater.format(d);
-        TextView dayText = (TextView) findViewById(R.id.dayTV);
-        dayText.setText(day);
+        //TextView dayText = (TextView) findViewById(R.id.dayTV);
+        //dayText.setText(day);
 
 
         nextEventIsAt = (TextView) findViewById(R.id.nexteventisat);
+
+        currenttime = (TextView) findViewById(R.id.currenttime);
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss aa");
+        //Date date = new Date();
+        String currTime = formatter.format(d);
+        currenttime.setText("Current Time: " + currTime);
+
+        SimpleDateFormat formatterHr = new SimpleDateFormat("HH");
+        String currHour = formatterHr.format(d);
+        final Integer currHourInt = Integer.valueOf(currHour);
+
+        locationofnextevent = (TextView) findViewById(R.id.locationofnextevent);
 
 
         final DatabaseReference myRef2 = mDatabase.getReference("Calendar");
@@ -100,8 +119,39 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Event e = noteDataSnapshot.getValue(Event.class);
-                    nextEventIsAt.setText(e.loc);
+                    final Event e = noteDataSnapshot.getValue(Event.class);
+                    String timeofevent=e.time;
+                    int colon = timeofevent.indexOf(':');
+                    String timeofeventHour = timeofevent.substring(0,colon);
+                    int timeofeventHourInt = Integer.valueOf(timeofeventHour);
+                    int diff = currHourInt-timeofeventHourInt;
+                    Log.v("MY_TAG", "diff = " + diff);
+                    if(diff<0){
+                        nextEventIsAt.setText(e.desc);
+                        locationofnextevent.setText(" at "+ e.loc + " at " + e.time);
+                        final DatabaseReference myRef = fb.mDatabase.getReference("Reminders");
+                        Query healthQuery = myRef.orderByChild(e.loc);
+
+                        healthQuery.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                                    EventReminder er = noteDataSnapshot.getValue(EventReminder.class);
+                                    Log.v("MY_TAG", er.toString());
+                                    if(e.loc.equals(er.location)) {
+                                        reminderPrint.setText("REMINDER: " + er.reminder + "       ");
+                                        break;
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.e("MY_TAG", "onCancelled", databaseError.toException());
+                            }
+                        });
+                        break;
+                    }
+
                 }
             }
 
@@ -110,11 +160,6 @@ public class MapActivity extends AppCompatActivity {
 
             }
         });
-        */
-
-        locationofnextevent = (TextView) findViewById(R.id.locationofnextevent);
-        locationofnextevent.setText("Track at 3:00");
-
 
     }
 
@@ -185,14 +230,14 @@ public class MapActivity extends AppCompatActivity {
             //height duration
             params.setMargins(((width / 2) - 350), 194, 0, 0);
             customView.setLayoutParams(params);
-            nextEvent.setText("");
+            //nextEvent.setText("");
             l.addView(customView);
             open = true;
         }
         else{
             open=false;
             l.removeView(customView);
-            nextEvent.setText("Next Event Is At:");
+            //nextEvent.setText("Next Event Is At:");
         }
     }
 
@@ -204,7 +249,7 @@ public class MapActivity extends AppCompatActivity {
         if(open==true){
             open=false;
             l.removeView(customView);
-            nextEvent.setText("Next Event Is At:");
+            //nextEvent.setText("Next Event Is At:");
         }
     }
 

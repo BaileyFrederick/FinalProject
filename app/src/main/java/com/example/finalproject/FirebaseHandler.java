@@ -136,5 +136,10 @@ public TextView t;
         myRef.child(er.location).setValue(er);
     }
 
+    public void addDirections(EventDirections ed){
+        DatabaseReference myRef = mDatabase.getReference("Directions");
+        myRef.child(ed.getToLoc()).setValue(ed);
+    }
+
 }
 
